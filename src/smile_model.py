@@ -40,8 +40,20 @@ class VkSmileModel:
         self.models = self.Models(models_path, fit_mode=fit_mode)
 
     def fit(self, data: pd.DataFrame, friends_path: str, hash_path: str,
-            sequences_matrix_path: str):
-        pass
+            sequences_matrix_path: str, sequences_traintest_path: str):
+        from .graph_fitting import fit_graph
+
+        graph_df = fit_graph(sequences_matrix_path, sequences_traintest_path)
+        df = pd.DataFrame.merge(data, graph_df, on='CLIENT_ID', how='left')
+        df_friends = self.models.df_friends if self.models.df_friends is not None else \
+            pd.DataFrame.merge(df, self.models.df_friends, on='CLIENT_ID', how='left')
+
+        df = pd.DataFrame.merge(df, df_friends, on='CLIENT_ID', how='left')
+        df = df.fillna(0)
+
+        self.models.model.fit(df)
+
+        return self
 
     def _fit_graph(self, sequences_matrix_path: str) -> pd.DataFrame:
         pass
