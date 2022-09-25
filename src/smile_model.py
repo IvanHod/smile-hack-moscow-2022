@@ -1,6 +1,7 @@
 import json
 import os
 import pickle
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -175,3 +176,18 @@ class VkSmileModel:
         df_graph = df_graph[df_graph.index.isin(set(df.index))]
 
         return self._merge(df, df_graph)
+
+    @staticmethod
+    def load_default_models(current_dir: Path):
+        path = current_dir / 'models'
+
+        if not (path / 'w2w_seq_all.pkl').exists():
+            os.system("wget -O w2w_seq_all.pkl 'https://smile.actcognitive.org/media/w2w_seq_all.pkl'")
+            os.system("mv w2w_seq_all.pkl models/w2w_seq_all.pkl")
+
+        friends_file = current_dir / 'friends_features_result_all.csv'
+        if not friends_file.exists():
+            friends_archive = current_dir / 'friends_features_result_all.csv.zip'
+
+            if friends_archive.exists():
+                os.system(f"unzip {str(friends_archive)}")
