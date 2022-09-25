@@ -42,7 +42,7 @@ def apply_model(df: pd.DataFrame):
     path = Path(__file__).parent / 'src' / 'models'
 
     if not (path / 'w2w_seq_all.pkl').exists():
-        pass  # download from cloud
+        os.system("wget 'https://smile.actcognitive.org/media/w2w_seq_all.pkl'")
 
     smile = VkSmileModel(str(path))
 
