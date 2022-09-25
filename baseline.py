@@ -40,11 +40,10 @@ def result(input_folder, output_folder):
 def apply_model(df: pd.DataFrame):
     y = None  # by default y may be not to be
 
+    path = Path(__file__).parent / 'src'
+    VkSmileModel.load_default_models(current_dir=path)
+
     path = Path(__file__).parent / 'src' / 'models'
-
-    if not (path / 'w2w_seq_all.pkl').exists():
-        os.system("wget 'https://smile.actcognitive.org/media/w2w_seq_all.pkl'")
-
     smile = VkSmileModel(str(path))
 
     proba = smile.predict_proba(df, friends_path='', hash_path='')

@@ -29,6 +29,7 @@ build: `docker build . -t smile`
 
 ### Методы
 
+- `load_default_models(current_dir: Path)` - [static] Подгрузить и обработать входные модели и данные для модели
 - `fit(X, y)` - X это сырые данные типа dask.datasets.DataFrame. y принимает np.ndarray или pd.Series
 - `predict(X, friends_path: str, hash_path: str)`
   + X это сырые данные типа dask.datasets.DataFrame
