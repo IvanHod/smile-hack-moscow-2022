@@ -1,9 +1,11 @@
 FROM python:3.9.7
 RUN mkdir /code
-COPY requirements.txt /code
-RUN pip install -r /code/requirements.txt
 RUN apt update
 RUN apt install -y gettext
+
+RUN pip install numpy
+RUN pip install pandas
+
 COPY . /code
 WORKDIR /code/
 ENV OUTPUT_FOLDER='output_folder'
