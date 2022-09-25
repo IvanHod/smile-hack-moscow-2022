@@ -34,7 +34,7 @@ class VkSmileModel:
 
                 self.df_friends = df_friends
 
-    def __init__(self, models_path: str, fit_mode=False):
+    def __init__(self, models_path: str = 'src/models', fit_mode=False):
         self.models = self.Models(models_path, fit_mode=fit_mode)
 
     def fit(self, data: pd.DataFrame, friends_path: str, hash_path: str,
