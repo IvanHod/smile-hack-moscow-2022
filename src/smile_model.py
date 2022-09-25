@@ -1,6 +1,7 @@
 import json
 import os
 import pickle
+import zipfile
 from pathlib import Path
 
 import numpy as np
@@ -183,11 +184,13 @@ class VkSmileModel:
 
         if not (path / 'w2w_seq_all.pkl').exists():
             os.system("wget -O w2w_seq_all.pkl 'https://smile.actcognitive.org/media/w2w_seq_all.pkl'")
-            os.system("mv w2w_seq_all.pkl models/w2w_seq_all.pkl")
+            os.system(f"mv w2w_seq_all.pkl {str(path)}/w2w_seq_all.pkl")
 
         friends_file = path / 'friends_features_result_all.csv'
         if not friends_file.exists():
             friends_archive = path / 'friends_features_result_all.csv.zip'
 
             if friends_archive.exists():
-                os.system(f"unzip {str(friends_archive)}")
+                with zipfile.ZipFile(str(friends_archive), 'r') as zip_ref:
+                    zip_ref.extractall(str(friends_file))
+                print('Friends were unzipped')
