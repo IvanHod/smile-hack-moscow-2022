@@ -205,4 +205,5 @@ class VkSmileModel:
             if friends_archive.exists():
                 with zipfile.ZipFile(str(friends_archive), 'r') as zip_ref:
                     zip_ref.extractall(str(path / 'friends'))
+                os.system(f"mv {str(path / 'friends' / 'friends_features_result_all.csv')} {str(path)}/friends_features_result_all.csv")
                 print('Friends were unzipped')
