@@ -185,9 +185,9 @@ class VkSmileModel:
             os.system("wget -O w2w_seq_all.pkl 'https://smile.actcognitive.org/media/w2w_seq_all.pkl'")
             os.system("mv w2w_seq_all.pkl models/w2w_seq_all.pkl")
 
-        friends_file = current_dir / 'friends_features_result_all.csv'
+        friends_file = path / 'friends_features_result_all.csv'
         if not friends_file.exists():
-            friends_archive = current_dir / 'friends_features_result_all.csv.zip'
+            friends_archive = path / 'friends_features_result_all.csv.zip'
 
             if friends_archive.exists():
                 os.system(f"unzip {str(friends_archive)}")

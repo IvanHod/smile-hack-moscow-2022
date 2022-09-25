@@ -6,3 +6,5 @@ argparse
 zipfile
 pathlib
 pickle
+catboost
+gensim
