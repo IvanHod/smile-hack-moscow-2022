@@ -40,6 +40,10 @@ def apply_model(df: pd.DataFrame):
     y = None  # by default y may be not to be
 
     path = Path(__file__).parent / 'src' / 'models'
+
+    if not (path / 'w2w_seq_all.pkl').exists():
+        pass  # download from cloud
+
     smile = VkSmileModel(str(path))
 
     proba = smile.predict_proba(df, friends_path='', hash_path='')
